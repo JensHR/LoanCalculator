@@ -22,34 +22,27 @@ public class SeriesLoan extends Loan{
     }
 
     public ArrayList<Double> calculateYearlyPaymentPlan(){
-        ArrayList<Double> result = new ArrayList<>();
 
-        int installment = Amount / PaybackYears;
-        int priceLeft = Amount;
-        int payedTotal = 0;
-
-        for (int i=0; i < PaybackYears; i++){
-            double payThisYear = installment + priceLeft * Interest;
-            priceLeft -= installment;
-            payedTotal += payThisYear;
-
-            result.add(payThisYear);
-        }
-
-        return result;
+        return calculatePaymentPlan(PaybackYears);
     }
 
     @Override
-    ArrayList<Double> calculateMonthlyPaymentPlan() {
-        ArrayList<Double> result = new ArrayList<>();
+    public ArrayList<Double> calculateMonthlyPaymentPlan() {
 
         int paybackMonths = PaybackYears * 12;
 
-        int installment = Amount / paybackMonths;
+        return calculatePaymentPlan(paybackMonths);
+    }
+
+    //Egen funksjon for utregning og oppdeling av betalings plan. Ettersom både årlig og månedlig regnes ut helt likt bare med forskellige intervaller kan denne brukes.
+    public ArrayList<Double> calculatePaymentPlan(int paybackIntervals){
+        ArrayList<Double> result = new ArrayList<>();
+
+        int installment = Amount / paybackIntervals;
         int priceLeft = Amount;
         int payedTotal = 0;
 
-        for (int i=0; i < paybackMonths; i++){
+        for (int i=0; i < paybackIntervals; i++){
             double payThisYear = installment + priceLeft * Interest;
             priceLeft -= installment;
             payedTotal += payThisYear;
