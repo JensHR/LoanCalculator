@@ -45,4 +45,13 @@ public abstract class Loan implements PaymentPlan{
     public void setPaybackYears(short paybackYears) {
         PaybackYears = paybackYears;
     }
+
+    @Override
+    public String toString() {
+        return "SeriesLoan{" +
+                "Interest=" + Interest +
+                ", Amount=" + Amount +
+                ", PaybackYears=" + PaybackYears +
+                '}';
+    }
 }
