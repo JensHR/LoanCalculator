@@ -8,23 +8,16 @@ public class Main {
 
     public static void main(String[] args){
 
-        int loanAmount = 0;
-        short paybackTimeYears = 0;
+        //Størrelsen på lånet, skal mottas av brukerinput
+        int loanAmount;
+        //Hvor mange år som skal brukes til å nedbetale lånet, skal mottas av brukerinput
+        short paybackTimeYears;
 
-        try{
-            //Forsøker å hente verdier fra program argumenter
-            loanAmount = Integer.parseInt(args[0]);
-            paybackTimeYears = Short.parseShort(args[1]);
+        //Lagrer verdier hentet fra bruker
+        int[] requestedValues = requestVariables(args);
+        loanAmount = (int) requestedValues[0];
+        paybackTimeYears = (short) requestedValues[1];
 
-        }catch (ArrayIndexOutOfBoundsException aioobE) {
-            System.out.println("Missing arguments");
-
-            //Henter verdier fra konsoll
-            int[] requestedValues = requestVariablesFromConsole();
-
-            loanAmount = (int) requestedValues[0];
-            paybackTimeYears = (short) requestedValues[1];
-        }
 
         //Lager en instanse av SeriesLoan klassen med verdiene vi hentet fra bruker.
         Loan loan = new SeriesLoan(loanAmount, paybackTimeYears);
@@ -34,6 +27,24 @@ public class Main {
         System.out.println(loan.calculateYearlyPaymentPlan());
         //Printer ArrayListen vi får som resultat fra calculateMonthlyPaymentPlan() altså hvor mye som må betales hver måned.
         System.out.println(loan.calculateMonthlyPaymentPlan());
+    }
+
+    public static int[] requestVariables(String[] args){
+
+        int[] requestedValues;
+
+        try{
+            //Forsøker å hente verdier fra program argumenter. Denne ble laget for mer effektiv testing.
+            requestedValues = new int[]{Integer.parseInt(args[0]), Short.parseShort(args[1])};
+
+        }catch (ArrayIndexOutOfBoundsException aioobE) {
+            System.out.println("Missing arguments");
+
+            //Henter verdier fra konsoll
+            requestedValues = requestVariablesFromConsole();
+
+        }
+        return requestedValues;
     }
 
     public static int[] requestVariablesFromConsole(){
