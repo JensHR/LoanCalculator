@@ -1,4 +1,4 @@
-package no.jenshr;
+package no.jenshr.Loan;
 
 import no.jenshr.Loan.Loan;
 

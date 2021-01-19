@@ -1,6 +1,7 @@
 package no.jenshr;
 
 import no.jenshr.Loan.Loan;
+import no.jenshr.Loan.SeriesLoan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
