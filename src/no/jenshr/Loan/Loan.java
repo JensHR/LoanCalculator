@@ -1,8 +1,10 @@
-package no.jenshr;
+package no.jenshr.Loan;
+
+import no.jenshr.PaymentPlan;
 
 import java.util.ArrayList;
 
-public abstract class Loan implements PaymentPlan{
+public abstract class Loan implements PaymentPlan {
 
     private double Interest;
     private int Amount;

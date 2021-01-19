@@ -1,47 +1,45 @@
 package no.jenshr;
 
+import no.jenshr.Loan.Loan;
+
 import java.util.ArrayList;
 
-public class SeriesLoan extends Loan{
-    private double Interest = 0.035;
-    private int Amount;
-    private short PaybackYears;
+public class SeriesLoan extends Loan {
 
-    public SeriesLoan(int amount, short paybackYears) {
-        super(amount, paybackYears);
+    public SeriesLoan(double interest, int amount, short paybackYears) {
+        super(interest, amount, paybackYears);
     }
 
     public ArrayList<Double> calculateYearlyPaymentPlan(){
 
-        return calculatePaymentPlan(PaybackYears);
+        return calculatePaymentPlan(getPaybackYears());
     }
 
     @Override
     public ArrayList<Double> calculateMonthlyPaymentPlan() {
 
-        int paybackMonths = PaybackYears * 12;
+        int paybackMonths = getPaybackYears() * 12;
 
         return calculatePaymentPlan(paybackMonths);
     }
 
     //Egen funksjon for utregning og oppdeling av betalings plan. Ettersom både årlig og månedlig regnes ut helt likt bare med forskellige tidsperspektiv kan denne brukes.
     public ArrayList<Double> calculatePaymentPlan(int paybackIntervals){
+        System.out.println(paybackIntervals);
         ArrayList<Double> result = new ArrayList<>();
 
-        int installment = Amount / paybackIntervals;
-        int priceLeft = Amount;
-
-        //Kunne vært intressant
-        int payedTotal = 0;
+        int installment = getAmount() / paybackIntervals;
+        int priceLeft = getAmount();
 
         for (int i=0; i < paybackIntervals; i++){
-            double payThisYear = installment + priceLeft * Interest;
+            double payThisYear = installment + priceLeft * getInterest();
             priceLeft -= installment;
-            payedTotal += payThisYear;
 
             result.add(payThisYear);
         }
 
         return result;
     }
+
+
 }
