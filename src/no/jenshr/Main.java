@@ -1,5 +1,7 @@
 package no.jenshr;
 
+import no.jenshr.Loan.Loan;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,6 +10,8 @@ public class Main {
 
     public static void main(String[] args){
 
+        //Lånets renter
+        double interest = 0.035;
         //Størrelsen på lånet, skal mottas av brukerinput
         int loanAmount;
         //Hvor mange år som skal brukes til å nedbetale lånet, skal mottas av brukerinput
@@ -20,7 +24,7 @@ public class Main {
 
 
         //Lager en instanse av SeriesLoan klassen med verdiene vi hentet fra bruker.
-        Loan loan = new SeriesLoan(loanAmount, paybackTimeYears);
+        Loan loan = new SeriesLoan(interest, loanAmount, paybackTimeYears);
         //Printer lån instansen sine verdier for totalsum (lån) antall (år) og renter.
         System.out.println(loan.toString());
         //Printer ArrayListen vi får som resultat fra calculateYearlyPaymentPlan() altså hvor mye som må betales hvert år.
